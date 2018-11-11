@@ -103,7 +103,7 @@ module.exports = class TrailheadAdapter {
     getProfileInfo(url, trailblazerModel){
         var self = this;
         return new Promise(function(resolve,reject){
-            puppeteer.launch({ args: ['--no-sandbox'] }).then(async browser => {
+            puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] }).then(async browser => {
                 try{
                     console.log(`starting browser and visiting:${url}`);
                     let page = await browser.newPage();
