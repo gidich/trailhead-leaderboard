@@ -96,6 +96,28 @@ module.exports = class TrailblazerModelFactory{
             
         });
     }
+    getById(trailblazerId){
+        var self = this;
+        return new Promise(function(resolve,reject){
+            try {
+               var q = self.TrablazerModel.findOne({trailblazerId:trailblazerId});
+               q.exec(
+                    function(err,results){
+                        if(err) {
+                            console.log('error')
+                            console.log(err)
+                            reject(err);
+                        }
+                        resolve(results);
+                    }
+               );
+            } catch (err) {
+                console.log('error');
+                reject(err);
+            }
+        })
+    }
+    /*
     getById(id){
         var self = this;
         return new Promise(function(resolve,reject){
@@ -113,6 +135,7 @@ module.exports = class TrailblazerModelFactory{
             }
         });
     }
+    */
     listAll(){
         try{
             return this.TrablazerModel.find({})

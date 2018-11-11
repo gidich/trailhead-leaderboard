@@ -13,7 +13,7 @@ exports.trailblazer_list = async function(req,res){
     var badgeLeaders
    var badgeLeaders = await trailblazerFactory.find(
         {},
-        ['full_name','badgeCount'],
+        ['full_name','badgeCount','trailblazerId'],
         {
             sort:{
                 badgeCount:-1
@@ -22,7 +22,7 @@ exports.trailblazer_list = async function(req,res){
     );
     var pointLeaders = await trailblazerFactory.find(
         {},
-        ['full_name','points'],
+        ['full_name','points','trailblazerId'],
         {
             sort:{
                 points:-1
@@ -31,7 +31,7 @@ exports.trailblazer_list = async function(req,res){
     );
     var newestTrailblazers = await trailblazerFactory.leanFind(
         {},
-        ['full_name','created_at'],
+        ['full_name','created_at','trailblazerId'],
         {
             sort:{
                 created_at:-1
@@ -47,13 +47,17 @@ exports.trailblazer_list = async function(req,res){
         pointLeaders:pointLeaders,
        newestTrailblazers:newestTrailblazers
     }
+    console.log(results);
     res.render('pages/index',results);
 }
 
 exports.trailblazer_create_get = function(req, res) {
     res.render('pages/trailblazerCreate');
 };
-
+exports.trailblazer_get = async function(req,res){
+    var result = await trailblazerFactory.getById(req.params.trailblazerId);
+    res.render('pages/trailblazerDetails',result);
+}
 exports.trailblazer_create_post = async function(req, res) {
     const errors = validationResult(req);
     var results = await trailheadAdapter.getProfileInfo(req.body.trailblazer_url,await trailblazerFactory.getNew());

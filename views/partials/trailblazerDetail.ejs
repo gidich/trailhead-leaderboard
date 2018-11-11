@@ -1,0 +1,80 @@
+            <div class="row" style="padding-bottom:20px;">
+                <div class="col-sm-12">
+                    <div class="card">
+                    
+                        <div class="card-header align-middle">
+                            <img src="<%= avatarImage.startsWith("/") ? "https://trailhead.salesforce.com" + avatarImage : avatarImage %>" class="rounded" style="max-width:60px;" alt="<%= full_name %>">&nbsp; &nbsp; 
+                            <h2 class="d-inline-block"><%= full_name %></h2>
+                        </div>
+                        <div class="card-body">
+                            
+                            
+                            <h5 class="card-title"><%= full_name %></h5>
+                            <div class="card-text">
+                                <div class="row">
+                                    <div class="col-sm-6">Company:</div>
+                                    <div class="col-sm-6"><%= company %></div>                        
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">Job Title:</div>
+                                    <div class="col-sm-6"><%= job_title %></div>                        
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">Points:</div>
+                                    <div class="col-sm-6"><%= points %></div>                        
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">Trails:</div>
+                                    <div class="col-sm-6"><%= trails %></div>                        
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">Badges:</div>
+                                    <div class="col-sm-6"><%= badgeCount %></div>                        
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">Rank:</div>
+                                    <div class="col-sm-6"><img src="<%= rankImage %>" class="rounded" style="max-width:25px;" alt="<%= full_name %>"> &nbsp; <%= rank %></div>                        
+                                </div>                                
+                                <div class="row">
+                                    <div class="col-sm-6">Bio:</div>
+                                    <div class="col-sm-6"><%= bio %></div>                        
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+       
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card-columns">
+                    <% badges.forEach(function(badge){ %>
+                        <div class="card" >
+                            <img class="card-img-top" style="width:10rem;margin:3rem;" src="<%= badge.icon_url %>" alt="Card image cap">
+                            <div class="card-body">
+                                <h6 class="card-title"><%= badge.title %></h6>
+                                <div class="card-text">
+                                    <div class="row" style="font-size:10px;">
+                                        <div class="col-sm-6">Badge Type:</div>
+                                        <div class="col-sm-6"><%= badge.type %></div>
+                                    </div>
+                                    <div class="row" style="font-size:10px;">
+                                        <div class="col-sm-6">Points:</div>
+                                        <div class="col-sm-6"><%= badge.points %></div>
+                                    </div>
+                                    <div class="row" style="font-size:10px;">
+                                        <div class="col-sm-6">State:</div>
+                                        <div class="col-sm-6"><%= badge.state %></div>
+                                    </div>
+                                    <div class="row" style="font-size:10px;">
+                                        <div class="col-sm-6">Progress:</div>
+                                        <div class="col-sm-6"><%= badge.progress %></div>
+                                    </div>                                    
+                                </div>
+                            </div>
+                        </div>
+                    <% }); %>
+                    </div>
+                </div>
+            </div>
+        

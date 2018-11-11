@@ -1,15 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <% include ../partials/header.ejs %>
     </head>
     <body>
-        <div>Hello World</div>
+        <div class="container">
+            <% include ../partials/navbar.ejs %>
 
-        <form action="/trailblazer/create/" method="post">
-            <label for="trailblazer_url">Enter name: </label>
-            <input id="trailblazer_url" type="text" name="trailblazer_url" value="https://trailhead.salesforce.com/en/me/gidich">
-            <input type="submit" value="OK">
-        </form>
+            <div class="row">
+                <div class="col-sm-12" style="padding-bottom:20px">
+                    <h1>Get Listed</h1>
+                    <p class="lead">
+                        It's quick and easy!
+                    </p>
+                    <% include ../partials/addTrailblazer.ejs %>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
