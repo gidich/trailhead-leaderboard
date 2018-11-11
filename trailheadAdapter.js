@@ -1,6 +1,5 @@
 "use strict";
 const puppeteer = require('puppeteer');
-var Horseman = require('node-horseman');
 
 module.exports = class TrailheadAdapter {
     async extractProfileDetails(page){
@@ -91,16 +90,13 @@ module.exports = class TrailheadAdapter {
                 rankImage: 'https://trailhead.salesforce.com' + $('.slds-show[data-test-current-rank]').first().find('img').attr('src').trim(),
                 rank: $('.slds-show[data-test-current-rank]').first().find('img').attr('alt').trim(),
                 avatarImage: $('img.user-information__avatar-img').first().attr('src').trim(),
-                
             }
-
             return Promise.resolve(results);
-
         });
         return results;
     }
 
-    getProfileInfo(url, trailblazerModel){
+    getProfileInfo(url){
         var self = this;
         return new Promise(function(resolve,reject){
             puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] }).then(async browser => {
@@ -109,18 +105,9 @@ module.exports = class TrailheadAdapter {
                     let page = await browser.newPage();
                     await page.setViewport({width:1920, height:1080});
                     await page.goto(url, {waitUntil: 'networkidle0'});
-
                     await page.waitFor(".user-profile").then(() => console.log('found user profile'));
                     let results = await self.extractProfileDetails(page);
-                    
-
-                    Object.assign(
-                        trailblazerModel,
-                        results
-                    );
-                    try { await browser.close(); } catch(err) { conosole.log(err); }
-                    resolve(trailblazerModel);  
-                    
+                    resolve(results);  
                 }catch(err){
                     console.log(err);
                     reject(err);

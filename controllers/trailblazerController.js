@@ -60,8 +60,8 @@ exports.trailblazer_get = async function(req,res){
 }
 exports.trailblazer_create_post = async function(req, res) {
     const errors = validationResult(req);
-    var results = await trailheadAdapter.getProfileInfo(req.body.trailblazer_url,await trailblazerFactory.getNew());
-    await trailblazerFactory.save(results);
+    var results = await trailheadAdapter.getProfileInfo(req.body.trailblazer_url);
+    await trailblazerFactory.set(results);
     res.render('pages/trailblazerConfirm',results);
 };
 

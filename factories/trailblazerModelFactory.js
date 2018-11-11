@@ -3,6 +3,7 @@
  }());
 
 var mongoose = require('mongoose');
+mongoose.set('useFindAndModify', false)
 var Schemas = require('../schemas/trailblazer');
 
 module.exports = class TrailblazerModelFactory{
@@ -56,25 +57,25 @@ module.exports = class TrailblazerModelFactory{
             }
         })
     }
-    save(model){
+    set(model){
         var self = this;
         return new Promise(function(resolve,reject){
             try{
-                var statsHistory = model.statsHistory || [];
-                statsHistory.push({
+                var newHistory = {
                     badgeCount: model.badgeCount,
                     points: model.points,
                     trails: model.trails,
                     rankImage: model.rankImage,
                     rank:model.rank
-                });
-                model.statsHistory = statsHistory;
-                delete model._doc._id;
+                };
                 self.TrablazerModel.findOneAndUpdate(
                     {
                         'trailblazerId':model.trailblazerId
                     },
-                    model,
+                    {
+                        $set: model,
+                        $push: {statsHistory:[newHistory]}
+                    },
                     {
                         upsert:true,
                         new:true,
@@ -100,7 +101,7 @@ module.exports = class TrailblazerModelFactory{
         var self = this;
         return new Promise(function(resolve,reject){
             try {
-               var q = self.TrablazerModel.findOne({trailblazerId:trailblazerId});
+               var q = self.TrablazerModel.findOne({trailblazerId:String(trailblazerId)});
                q.exec(
                     function(err,results){
                         if(err) {
@@ -108,7 +109,7 @@ module.exports = class TrailblazerModelFactory{
                             console.log(err)
                             reject(err);
                         }
-                        resolve(results);
+                        resolve(results !== null || self.getNew());
                     }
                );
             } catch (err) {
@@ -117,25 +118,6 @@ module.exports = class TrailblazerModelFactory{
             }
         })
     }
-    /*
-    getById(id){
-        var self = this;
-        return new Promise(function(resolve,reject){
-            try{
-                self.TrablazerModel.findOne({tailblazerId:id}, function(err,results){
-                    if(err) {
-                        console.log('error')
-                        console.log(err)
-                        reject(err);
-                    }
-                    resolve(results);
-                });
-            }catch(err){
-                reject(err);
-            }
-        });
-    }
-    */
     listAll(){
         try{
             return this.TrablazerModel.find({})
