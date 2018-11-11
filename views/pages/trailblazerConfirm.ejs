@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <% include ../partials/header.ejs %>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row" style="margin-bottom:2rem;">
+                <div class="col-sm-12">
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= full_name %></h5>
+                            <p class="card-text">
+                                <div class="row">
+                                    <div class="col-sm-6"></div>
+                                    <div class="col-sm-6"></div>                        
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6"></div>
+                                    <div class="col-sm-6"></div>                        
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">Company:</div>
+                                    <div class="col-sm-6"><%= company %></div>                        
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">Job Title:</div>
+                                    <div class="col-sm-6"><%= job_title %></div>                        
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">Points:</div>
+                                    <div class="col-sm-6"><%= points %></div>                        
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">Trails:</div>
+                                    <div class="col-sm-6"><%= trails %></div>                        
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">Badges:</div>
+                                    <div class="col-sm-6"><%= badgeCount %></div>                        
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">Rank:</div>
+                                    <div class="col-sm-6"><%= rank %></div>                        
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-sm-6">Bio:</div>
+                                    <div class="col-sm-6"><%= bio %></div>                        
+                                </div>
+                                
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+                
+            </div>
+       
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card-columns">
+                    <% badges.forEach(function(badge){ %>
+                        <div class="card" >
+                            <img class="card-img-top" style="width:10rem;margin:3rem;" src="<%= badge.icon_url %>" alt="Card image cap">
+                            <div class="card-body">
+                                <h6 class="card-title"><%= badge.title %></h6>
+                                <p class="card-text">
+                                    <div class="row" style="font-size:10px;">
+                                        <div class="col-sm-6">Badge Type:</div>
+                                        <div class="col-sm-6"><%= badge.type %></div>
+                                    </div>
+                                    <div class="row" style="font-size:10px;">
+                                        <div class="col-sm-6">Points:</div>
+                                        <div class="col-sm-6"><%= badge.points %></div>
+                                    </div>
+                                    <div class="row" style="font-size:10px;">
+                                        <div class="col-sm-6">State:</div>
+                                        <div class="col-sm-6"><%= badge.state %></div>
+                                    </div>
+                                    <div class="row" style="font-size:10px;">
+                                        <div class="col-sm-6">Progress:</div>
+                                        <div class="col-sm-6"><%= badge.progress %></div>
+                                    </div>
+                                    
+                                </p>
+                            </div>
+                        </div>
+                    <% }); %>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <form action="/trailblazer/create/" method="post">
+            <label for="trailblazer_url">Enter name: </label>
+            <input id="trailblazer_url" type="text" name="trailblazer_url" value="<%= profileUrl %>">
+            <input type="submit" value="OK">
+        </form>
+    </body>
+</html>

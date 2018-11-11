@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <% include ../partials/header.ejs %>
+    </head>
+    <body>
+        <div>Hello World</div>
+
+        <form action="/trailblazer/create/" method="post">
+            <label for="trailblazer_url">Enter name: </label>
+            <input id="trailblazer_url" type="text" name="trailblazer_url" value="https://trailhead.salesforce.com/en/me/gidich">
+            <input type="submit" value="OK">
+        </form>
+    </body>
+</html>
