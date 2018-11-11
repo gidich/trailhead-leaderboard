@@ -109,7 +109,8 @@ module.exports = class TrailblazerModelFactory{
                             console.log(err)
                             reject(err);
                         }
-                        resolve(results !== null || self.getNew());
+                        
+                        resolve(results !== null ? results : self.getNew());
                     }
                );
             } catch (err) {
