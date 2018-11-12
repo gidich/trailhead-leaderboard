@@ -38,6 +38,117 @@ exports.trailblazer_list = async function(req,res){
             }
         }
     );
+    var badgesThisMonth = await trailblazerFactory.aggregate(
+        [
+            {
+                $project: {
+                    trailblazerId:1,
+                    full_name:1,
+                    badges: {
+                        $size: {
+                            $filter: {
+                                input: "$badges",
+                                as: "badge",
+                                cond: {
+                                        $and:[
+                                            {
+                                                $eq : [
+                                                    {$month:'$$badge.completed_at'}, 
+                                                    (new Date()).getMonth() + 1
+                                                ]
+                                            },
+                                            {
+                                                $eq : [
+                                                    {$year:'$$badge.completed_at'}, 
+                                                    (new Date()).getFullYear()
+                                                ]
+                                            }
+                                        ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                $sort: {badges:-1}
+            }
+        ]            
+    );
+    var badgesLastMonth = await trailblazerFactory.aggregate(
+        [
+            {
+                $project: {
+                    trailblazerId:1,
+                    full_name:1,
+                    badges: {
+                        $size: {
+                            $filter: {
+                                input: "$badges",
+                                as: "badge",
+                                cond: {
+                                        $and:[
+                                            {
+                                                $eq : [
+                                                    {$month:'$$badge.completed_at'}, 
+                                                    (new Date()).getMonth() 
+                                                ]
+                                            },
+                                            {
+                                                $eq : [
+                                                    {$year:'$$badge.completed_at'}, 
+                                                    (new Date()).getFullYear()
+                                                ]
+                                            }
+                                        ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                $sort: {badges:-1}
+            }
+        ]            
+    );
+    var badges2MonthsAgo = await trailblazerFactory.aggregate(
+        [
+            {
+                $project: {
+                    trailblazerId:1,
+                    full_name:1,
+                    badges: {
+                        $size: {
+                            $filter: {
+                                input: "$badges",
+                                as: "badge",
+                                cond: {
+                                        $and:[
+                                            {
+                                                $eq : [
+                                                    {$month:'$$badge.completed_at'}, 
+                                                    (new Date()).getMonth() -1
+                                                ]
+                                            },
+                                            {
+                                                $eq : [
+                                                    {$year:'$$badge.completed_at'}, 
+                                                    (new Date()).getFullYear()
+                                                ]
+                                            }
+                                        ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                $sort: {badges:-1}
+            }
+        ]            
+    );
     newestTrailblazers.forEach((element,index,array) => {
         newestTrailblazers[index].created_at = moment(element.created_at).fromNow();
     });
@@ -45,7 +156,10 @@ exports.trailblazer_list = async function(req,res){
     var results = {
         badgeLeaders: badgeLeaders,
         pointLeaders:pointLeaders,
-       newestTrailblazers:newestTrailblazers
+        newestTrailblazers:newestTrailblazers,
+        badgesThisMonth:badgesThisMonth,
+        badgesLastMonth:badgesLastMonth,
+        badges2MonthsAgo:badges2MonthsAgo
     }
     console.log(results);
     res.render('pages/index',results);
@@ -64,4 +178,3 @@ exports.trailblazer_create_post = async function(req, res) {
     await trailblazerFactory.set(results);
     res.render('pages/trailblazerConfirm',results);
 };
-

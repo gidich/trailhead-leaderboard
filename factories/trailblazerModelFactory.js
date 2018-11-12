@@ -13,6 +13,27 @@ module.exports = class TrailblazerModelFactory{
     getNew(){
         return new this.TrablazerModel({schemaVersion:'0.0.1'});
     }
+    aggregate(aggreggations){
+        var self = this;
+        return new Promise(function(resolve,reject){
+            try {
+                var q = self.TrablazerModel.aggregate(aggreggations);
+                q.exec(
+                    function(err,results){
+                        if(err) {
+                            console.log('error')
+                            console.log(err)
+                            reject(err);
+                        }
+                        resolve(results);
+                    }
+                )
+            } catch (err) {
+                console.log('error');
+                reject(err);
+            }
+        });
+    }
     find(filters,columns,options){
         var self = this;
         return new Promise(function(resolve,reject){
