@@ -3,11 +3,11 @@ var TrailheadAdapter = require('./trailheadAdapter');
 const dotenv = require('dotenv');
 const dotenvConig = dotenv.config()
  
-if (dotenvConig.error) {
-  throw dotenvConig.error
+if (!dotenvConig.error) {
+    console.log(dotenvConig.parsed);
 }
  
-console.log(dotenvConig.parsed)
+
 
 const { Pool } = require('pg');
 var mongoose = require('mongoose');
