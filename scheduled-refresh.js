@@ -31,7 +31,6 @@ function delay(){
 }
 
 async function main() {
-
     try {
         var trailblazers = await trailblazerFactory.leanFind(
             {},
@@ -39,15 +38,15 @@ async function main() {
             {
                 sort:{
                     badgeCount:-1
-                },
-                limit:5
+                }//,
+                //limit:2
             }
         );
         async function processTrailblazers(traiblazers){
             for(const trailblazer of traiblazers){
                 try {
-                 //   var results = await trailheadAdapter.getProfileInfo(trailblazer.profileUrl);
-                   // await trailblazerFactory.set(results);
+                    var results = await trailheadAdapter.getProfileInfo(trailblazer.profileUrl);
+                    await trailblazerFactory.set(results);
                     await delay();
                     console.log(`successfully updated profile information for :${trailblazer.full_name} at url:${trailblazer.profileUrl}`  );
                 } catch (error) {
@@ -62,7 +61,6 @@ async function main() {
         console.log(`encountered error while updating profile information for :${trailblazer.full_name} at url:${trailblazer.profileUrl} error: ${error}`  );
         return;
     }   
-    
 }
 
 main()
