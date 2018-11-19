@@ -37,6 +37,16 @@ You'll want to create your own **.env** file with the MongoDB URI in it:
 Grab a copy of the code and run it locally
 
 
+Once you're set up and running it locally, push the code to heroku, test it out there.
+
+You can schedule the list to auto update by adding the following to your scheduled task:
+
+    node scheduled-refresh.js
+
+Dyno Size: `FREE`  
+Frequency: `Daily`  
+Next Due: `00`
+
 ## Other notes:
 
 Sometimes the local heroku development enviornment would die in the bakground, [this stackoverflow tip](https://stackoverflow.com/questions/33048784/heroku-open-puma-port-5000-already-in-use-rails) was helpful
@@ -54,4 +64,4 @@ Find the PID and then kill the process with this command:
 
 
 
-Pull Requests are Welcome!
+`Pull Requests are Welcome!`
