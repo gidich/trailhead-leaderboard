@@ -8,7 +8,7 @@ This is a simple application to help gain adoption of trailhead by allowing your
 
 https://trailhead-leaderboard.herokuapp.com/
 
-This entire application can run for free on Heroku.
+This entire application can run **for free** on Heroku.
 
 ## Setup Procedure:
 
@@ -20,9 +20,9 @@ You will need to install the puppeteer buildpack:
 
     heroku buildpacks:set jontewks/puppeteer
 
-Be sure to re-add the node jetpack after addingpuppeteer, as it may get removed.
+Be sure to re-add the node jetpack after adding puppeteer, as it may get removed.
 
-    heroku buildpacks:set heroku/php
+    heroku buildpacks:set heroku/nodejs
 
 
 You will then need to install both of the following add-ons:
@@ -49,9 +49,7 @@ Next Due: `00`
 
 ## Other notes:
 
-Sometimes the local heroku development enviornment would die in the bakground, [this stackoverflow tip](https://stackoverflow.com/questions/33048784/heroku-open-puma-port-5000-already-in-use-rails) was helpful
-
-
+Sometimes the local heroku development enviornment would die in the bakground, [this stackoverflow tip](https://stackoverflow.com/questions/33048784/heroku-open-puma-port-5000-already-in-use-rails) was helpful:
 
 
 Lists all processes on port 5000:
@@ -62,6 +60,6 @@ Find the PID and then kill the process with this command:
 
     sudo kill -9 <<pid>>
 
-
+## Contributing:
 
 `Pull Requests are Welcome!`
