@@ -107,6 +107,7 @@ module.exports = class TrailheadAdapter {
                     await page.goto(url, {waitUntil: 'networkidle0'});
                     await page.waitFor(".user-profile").then(() => console.log('found user profile'));
                     let results = await self.extractProfileDetails(page);
+                    await browser.close();
                     resolve(results);  
                 }catch(err){
                     console.log(err);
