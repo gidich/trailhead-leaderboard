@@ -147,7 +147,29 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h1>Trailblazers by Badge</h1>
+                    <div class="card-columns">
 
+                    <% if(trailblazersByBadges){ 
+                        trailblazersByBadges.forEach(function(trailblazersByBadge,index){ %>
+                        <div class="card" style="width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title"><a href="<%= trailblazersByBadge.path %>" target="_blank"><%= trailblazersByBadge._id %></a></h5>
+                                <p class="card-text">
+                                <% if(trailblazersByBadge.path){ 
+                                    trailblazersByBadge.trailblazers.forEach(function(trailblazer,index){ %>
+                                    <span class="badge badge-light"><a href="/trailblazer/details/<%= trailblazer.trailblazerId %>"><%= trailblazer.full_name %></a></span>
+
+                                <% });} %>
+                                </p>
+                            </div>
+                        </div>
+                    <% });} %>
+                    </div>
+                </div>
+            </div>
             
        </div>
     </body>

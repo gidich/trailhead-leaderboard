@@ -152,14 +152,49 @@ exports.trailblazer_list = async function(req,res){
     newestTrailblazers.forEach((element,index,array) => {
         newestTrailblazers[index].created_at = moment(element.created_at).fromNow();
     });
-    
+    var trailblazersByBadges = await trailblazerFactory.aggregate(
+        [
+            { 
+                $unwind : "$badges" 
+            },
+            {
+                $group : { 
+                    _id: "$badges.title", 
+                    path: {$first:"$badges.path"},
+                    trailblazers: { $push: "$$ROOT" }
+                }
+            },
+            { 
+                $project: { 
+                    _id: 1, 
+                    path: 1,
+                    trailblazers: {
+                        $map: {
+                            input: "$trailblazers",
+                            as: "t",
+                            in: {
+                                full_name: "$$t.full_name",
+                                avatarImage: "$$t.avatarImage"
+                            }
+                        }
+                    }
+                }
+            },
+            { 
+                $sort: {
+                    _id: 1
+                }
+            }
+        ]
+    )
     var results = {
         badgeLeaders: badgeLeaders,
         pointLeaders:pointLeaders,
         newestTrailblazers:newestTrailblazers,
         badgesThisMonth:badgesThisMonth,
         badgesLastMonth:badgesLastMonth,
-        badges2MonthsAgo:badges2MonthsAgo
+        badges2MonthsAgo:badges2MonthsAgo,
+        trailblazersByBadges:trailblazersByBadges
     }
     console.log(results);
     res.render('pages/index',results);
