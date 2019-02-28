@@ -71,7 +71,8 @@ exports.trailblazer_list = async function(req,res){
                 }
             },
             {
-                $sort: {badges:-1}
+                $sort: {badges:-1},
+                allowDiskUse: true 
             }
         ]            
     );
@@ -108,7 +109,8 @@ exports.trailblazer_list = async function(req,res){
                 }
             },
             {
-                $sort: {badges:-1}
+                $sort: {badges:-1},
+                allowDiskUse: true 
             }
         ]            
     );
@@ -145,7 +147,8 @@ exports.trailblazer_list = async function(req,res){
                 }
             },
             {
-                $sort: {badges:-1}
+                $sort: {badges:-1},
+                allowDiskUse: true 
             }
         ]            
     );
@@ -183,7 +186,8 @@ exports.trailblazer_list = async function(req,res){
             { 
                 $sort: {
                     _id: 1
-                }
+                },
+                allowDiskUse: true 
             }
         ]
     )
