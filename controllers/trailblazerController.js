@@ -55,7 +55,7 @@ exports.trailblazer_list = async function(req,res){
                                             {
                                                 $eq : [
                                                     {$month:'$$badge.completed_at'}, 
-                                                    now.getMonth()
+                                                    now.getMonth() + 1 
                                                 ]
                                             },
                                             {
@@ -93,7 +93,7 @@ exports.trailblazer_list = async function(req,res){
                                             {
                                                 $eq : [
                                                     {$month:'$$badge.completed_at'}, 
-                                                    lastMonth.getMonth() 
+                                                    lastMonth.getMonth() + 1
                                                 ]
                                             },
                                             {
@@ -131,7 +131,7 @@ exports.trailblazer_list = async function(req,res){
                                             {
                                                 $eq : [
                                                     {$month:'$$badge.completed_at'}, 
-                                                    twoMonthsAgo.getMonth()
+                                                    twoMonthsAgo.getMonth() + 1
                                                 ]
                                             },
                                             {
