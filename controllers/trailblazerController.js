@@ -10,16 +10,17 @@ var moment = require('moment');
 
 exports.trailblazer_list = async function(req,res){
     var self = this;
-    var badgeLeaders
-   var badgeLeaders = await trailblazerFactory.find(
-        {},
-        ['full_name','badgeCount','trailblazerId'],
-        {
-            sort:{
-                badgeCount:-1
+    var now = new Date();
+    
+    var badgeLeaders = await trailblazerFactory.find(
+            {},
+            ['full_name','badgeCount','trailblazerId'],
+            {
+                sort:{
+                    badgeCount:-1
+                }
             }
-        }
-    );
+        );
     var pointLeaders = await trailblazerFactory.find(
         {},
         ['full_name','points','trailblazerId'],
@@ -54,13 +55,13 @@ exports.trailblazer_list = async function(req,res){
                                             {
                                                 $eq : [
                                                     {$month:'$$badge.completed_at'}, 
-                                                    (new Date()).getMonth() + 1
+                                                    now.getMonth()
                                                 ]
                                             },
                                             {
                                                 $eq : [
                                                     {$year:'$$badge.completed_at'}, 
-                                                    (new Date()).getFullYear()
+                                                    now.getFullYear()
                                                 ]
                                             }
                                         ]
@@ -71,11 +72,11 @@ exports.trailblazer_list = async function(req,res){
                 }
             },
             {
-                $sort: {badges:-1},
-                allowDiskUse: true 
+                $sort: {badges:-1}
             }
-        ]            
+        ]    
     );
+    var lastMonth = moment().subtract(1,'months').toDate();
     var badgesLastMonth = await trailblazerFactory.aggregate(
         [
             {
@@ -92,13 +93,13 @@ exports.trailblazer_list = async function(req,res){
                                             {
                                                 $eq : [
                                                     {$month:'$$badge.completed_at'}, 
-                                                    (new Date()).getMonth() 
+                                                    lastMonth.getMonth() 
                                                 ]
                                             },
                                             {
                                                 $eq : [
                                                     {$year:'$$badge.completed_at'}, 
-                                                    (new Date()).getFullYear()
+                                                    lastMonth.getFullYear()
                                                 ]
                                             }
                                         ]
@@ -109,11 +110,11 @@ exports.trailblazer_list = async function(req,res){
                 }
             },
             {
-                $sort: {badges:-1},
-                allowDiskUse: true 
+                $sort: {badges:-1}
             }
-        ]            
+        ]          
     );
+    var twoMonthsAgo =  moment().subtract(2,'months').toDate();
     var badges2MonthsAgo = await trailblazerFactory.aggregate(
         [
             {
@@ -130,13 +131,13 @@ exports.trailblazer_list = async function(req,res){
                                             {
                                                 $eq : [
                                                     {$month:'$$badge.completed_at'}, 
-                                                    (new Date()).getMonth() -1
+                                                    twoMonthsAgo.getMonth()
                                                 ]
                                             },
                                             {
                                                 $eq : [
                                                     {$year:'$$badge.completed_at'}, 
-                                                    (new Date()).getFullYear()
+                                                    twoMonthsAgo.getFullYear()
                                                 ]
                                             }
                                         ]
@@ -147,10 +148,9 @@ exports.trailblazer_list = async function(req,res){
                 }
             },
             {
-                $sort: {badges:-1},
-                allowDiskUse: true 
+                $sort: {badges:-1}
             }
-        ]            
+        ]         
     );
     newestTrailblazers.forEach((element,index,array) => {
         newestTrailblazers[index].created_at = moment(element.created_at).fromNow();
@@ -186,10 +186,9 @@ exports.trailblazer_list = async function(req,res){
             { 
                 $sort: {
                     _id: 1
-                },
-                allowDiskUse: true 
+                }
             }
-        ]
+        ]  
     )
     var results = {
         badgeLeaders: badgeLeaders,

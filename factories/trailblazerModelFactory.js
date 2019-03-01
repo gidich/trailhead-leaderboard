@@ -18,6 +18,7 @@ module.exports = class TrailblazerModelFactory{
         return new Promise(function(resolve,reject){
             try {
                 var q = self.TrablazerModel.aggregate(aggreggations);
+                q.allowDiskUse(true);  
                 q.exec(
                     function(err,results){
                         if(err) {
