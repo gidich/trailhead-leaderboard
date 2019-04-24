@@ -39,6 +39,71 @@ exports.trailblazer_list = async function(req,res){
             }
         }
     );
+    var devOneCert = await trailblazerFactory.aggregate(
+        [
+            {
+                $project: {
+                    trailblazerId:1,
+                    full_name:1,
+                    badges: {
+                        $size: {
+                            $filter: {
+                                input: "$badges",
+                                as: "badge",
+                                cond: {
+                                        $in:[
+                                            '$$badge.title',
+                                            [
+                                                'Salesforce Fundamentals',
+                                                'Apex Basics & Database',
+                                                'Salesforce Platform Basics',
+                                                'Apex & .NET Basics',
+                                                'Visualforce Basics',
+                                                'Quick Start: Visualforce',
+                                                'CRM for Lightning Experience',
+                                                'Data Modeling',
+                                                'AppExchange Basics',
+                                                'AppExchange Partner Basics',
+                                                'Platform Development Basics',
+                                                'Salesforce Mobile App Customization',
+                                                'Salesforce Technology Model',
+                                                'Quick Start: Build Your First App',
+                                                'Build a Suggestion Box App',
+                                                'Data Modeling and Management',
+                                                'Data Management',
+                                                'Import and Export with Data Management Tools',
+                                                'Logic and Process Automation',
+                                                'Database & .NET Basics',
+                                                'Formulas & Validations',
+                                                'Lightning Flow',
+                                                'Quick Start: Process Builder',
+                                                'Apex Triggers',
+                                                'Control Flow Statements',
+                                                'Build a Conference Management App',
+                                                'Quick Start: Apex',
+                                                'Search Solution Basics',
+                                                'Triggers and Order of Execution',
+                                                'AppExchange Security Review',
+                                                'Data Security',
+                                                'User Interface',
+                                                'Aura Components Basics',
+                                                'Lightning Experience Development',
+                                                'Lightning Apps',
+                                                'Aura Components Core Concepts',
+                                                'Aura Components Skills & Tools'
+                                            ]
+                                        ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                $sort: {badges:-1}
+            }
+        ]
+    );
     var badgesThisMonth = await trailblazerFactory.aggregate(
         [
             {
@@ -197,7 +262,8 @@ exports.trailblazer_list = async function(req,res){
         badgesThisMonth:badgesThisMonth,
         badgesLastMonth:badgesLastMonth,
         badges2MonthsAgo:badges2MonthsAgo,
-        trailblazersByBadges:trailblazersByBadges
+        trailblazersByBadges:trailblazersByBadges,
+        devOneCert:devOneCert
     }
     console.log(results);
     res.render('pages/index',results);
