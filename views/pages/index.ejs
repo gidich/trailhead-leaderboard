@@ -102,20 +102,21 @@
                             </ol>
                             </div>
                         </div>
+
                         <div class="card">
                             <div class="card-body">
-                            <h4 class="card-title">This Month's Badge Leaders</h4>
+                            <h4 class="card-title">Admin Cert Prep Leaders</h4>
                             <ol>
-                            <% if(badgesThisMonth){ 
-                                badgesThisMonth.forEach(function(badgeThisMonth,index){ %>
+                            <% if(adminCert){ 
+                                adminCert.forEach(function(item,index){ %>
                                 <li>
                                     <div class="row">
                                         <div class="col-sm-6 <%= (index == 0) ?  'font-weight-bold' : '' %>">
-                                            <a href="/trailblazer/details/<%= badgeThisMonth.trailblazerId %>"><%= badgeThisMonth.full_name %></a>
+                                            <a href="/trailblazer/details/<%= item.trailblazerId %>"><%= item.full_name %></a>
                                         </div>
                                         <div class="col-sm-6 text-right">
                                             
-                                            <span class="badge <%= (index < 5) ? 'badge-primary' : 'badge-info' %>"><%= badgeThisMonth.badges %></span>
+                                            <span class="badge <%= (index < 5) ? 'badge-primary' : 'badge-info' %>"><%= item.badges %></span>
                                         </div>
                                     </div>
                                 </li>
@@ -126,18 +127,18 @@
 
                         <div class="card">
                             <div class="card-body">
-                            <h4 class="card-title">Last Month's Badge Leaders</h4>
+                            <h4 class="card-title">Advanced Admin Cert Prep Leaders</h4>
                             <ol>
-                            <% if(badgesLastMonth){ 
-                                badgesLastMonth.forEach(function(badgeThisMonth,index){ %>
+                            <% if(advancedAdminCert){ 
+                                advancedAdminCert.forEach(function(item,index){ %>
                                 <li>
                                     <div class="row">
                                         <div class="col-sm-6 <%= (index == 0) ?  'font-weight-bold' : '' %>">
-                                            <a href="/trailblazer/details/<%= badgeThisMonth.trailblazerId %>"><%= badgeThisMonth.full_name %></a>
+                                            <a href="/trailblazer/details/<%= item.trailblazerId %>"><%= item.full_name %></a>
                                         </div>
                                         <div class="col-sm-6 text-right">
                                             
-                                            <span class="badge <%= (index < 5) ? 'badge-primary' : 'badge-info' %>"><%= badgeThisMonth.badges %></span>
+                                            <span class="badge <%= (index < 5) ? 'badge-primary' : 'badge-info' %>"><%= item.badges %></span>
                                         </div>
                                     </div>
                                 </li>
@@ -146,20 +147,20 @@
                             </div>
                         </div>
 
-                         <div class="card">
+                        <div class="card">
                             <div class="card-body">
-                            <h4 class="card-title">2 Months Ago Badge Leaders</h4>
+                            <h4 class="card-title">Platform App Builder Cert Prep Leaders</h4>
                             <ol>
-                            <% if(badges2MonthsAgo){ 
-                                badges2MonthsAgo.forEach(function(badgeThisMonth,index){ %>
+                            <% if(platformAppBuilderCert){ 
+                                platformAppBuilderCert.forEach(function(item,index){ %>
                                 <li>
                                     <div class="row">
                                         <div class="col-sm-6 <%= (index == 0) ?  'font-weight-bold' : '' %>">
-                                            <a href="/trailblazer/details/<%= badgeThisMonth.trailblazerId %>"><%= badgeThisMonth.full_name %></a>
+                                            <a href="/trailblazer/details/<%= item.trailblazerId %>"><%= item.full_name %></a>
                                         </div>
                                         <div class="col-sm-6 text-right">
                                             
-                                            <span class="badge <%= (index < 5) ? 'badge-primary' : 'badge-info' %>"><%= badgeThisMonth.badges %></span>
+                                            <span class="badge <%= (index < 5) ? 'badge-primary' : 'badge-info' %>"><%= item.badges %></span>
                                         </div>
                                     </div>
                                 </li>
@@ -167,6 +168,7 @@
                             </ol>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
