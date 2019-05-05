@@ -1,5 +1,14 @@
 # Salesforce Trailhead Leaderboard
 
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+
+
+Quickstart:
+
+1. Click the **Deploy to Heroku** button
+    - For **App Name**, specify a name for your application. For example, if you specify trailhead-leaderboard, your application will be available at http://trailhead-leaderboard.herokuapp.com. Your app name has to be unique on the herokuapp.com domain.
+    - Click the **Deploy For Free** button
+
 ## About:
 
 This is a simple application to help gain adoption of trailhead by allowing your team to see stats in the same manner as a gaming leaderboard.

@@ -1,0 +1,28 @@
+{
+  "name": "trailhead-leaderboard",
+  "description": "A simple leaderboard to help your team learn Salesforce",
+  "repository": "https://github.com/gidich/trailhead-leaderboard",
+  "website": "https://github.com/gidich/trailhead-leaderboard",
+  "logo": "https://raw.githubusercontent.com/gidich/trailhead-leaderboard/master/trailhead-leaderboard.png",
+  "keywords": ["node", "express", "salesforce"],
+  "success_url": "/",
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "Free"
+    }
+  },
+  "addons": [
+    {
+      "plan": "mongolab:sandbox",
+      "as": "MONGODB"
+    },
+    {
+        "plan": "scheduler:standard"
+    }
+  ],
+  "buildpacks": [
+    {"url": "jontewks/puppeteer"},
+    {"url": "heroku/nodejs"}
+  ]
+}
