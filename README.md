@@ -7,7 +7,7 @@ This is a simple application to help gain adoption of trailhead by allowing your
 
 ## Demo URL:
 
-https://trailhead-leaderboard.herokuapp.com/
+https://sample-trailhead-leaderboard.herokuapp.com/
 
 This entire application can run **for free** on Heroku.
 
@@ -18,7 +18,7 @@ This entire application can run **for free** on Heroku.
 
     [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
-    - For **App Name**, specify a name for your application. For example, if you specify trailhead-leaderboard, your application will be available at http://trailhead-leaderboard.herokuapp.com. Your app name has to be unique on the herokuapp.com domain.
+    - For **App Name**, specify a name for your application. For example, if you specify sample-trailhead-leaderboard, your application will be available at http://sample-trailhead-leaderboard.herokuapp.com. Your app name has to be unique on the herokuapp.com domain.
     - Click the **Deploy App** button
     
 2. Configure the schedule: (this keeps the leaderboard up to date daily)
