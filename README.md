@@ -1,13 +1,5 @@
 # Salesforce Trailhead Leaderboard
 
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
-
-
-Quickstart:
-
-1. Click the **Deploy to Heroku** button
-    - For **App Name**, specify a name for your application. For example, if you specify trailhead-leaderboard, your application will be available at http://trailhead-leaderboard.herokuapp.com. Your app name has to be unique on the herokuapp.com domain.
-    - Click the **Deploy For Free** button
 
 ## About:
 
@@ -19,65 +11,76 @@ https://trailhead-leaderboard.herokuapp.com/
 
 This entire application can run **for free** on Heroku.
 
-## Setup Procedure:
+
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+
+
+## Quickstart:
+
+1. Click the **Deploy to Heroku** button
+    - For **App Name**, specify a name for your application. For example, if you specify trailhead-leaderboard, your application will be available at http://trailhead-leaderboard.herokuapp.com. Your app name has to be unique on the herokuapp.com domain.
+    - Click the **Deploy For Free** button
+    - This will get you up and running and you can get your team listed, but you'll want to keep their scores up to ate.
+2. Configure the schedule: (this keeps the leaderboard up to date daily)
+    - Navigate to the heroku dashboard https://dashboard.heroku.com/apps and select your app.
+    - Choose **Resources** > **Heroku Scheduler** (a new browser tab will appear)
+    - Click **Create Job**  (the Job Editor side panel will display)
+    - In the Schedule area, choose **Every day at...** 1:00 PM UTC 
+    - In the Run Command area next to the dollar sign ($), type in
+       node scheduled-refresh.js
+    - Click **Save Job
+    
+
+## Contributing:
+
+`Pull Requests are Welcome!`
+
+## Additional Details, how to run locally
 
 It is good to follow Heroku's [node.js tutorial](https://devcenter.heroku.com/articles/getting-started-with-nodejs) to get an understanding of how node.js works on Heroku and to configure your local environment.
 
-
-
-You will need to install the puppeteer buildpack: 
-
-    heroku buildpacks:set jontewks/puppeteer
-
-Be sure to re-add the node jetpack after adding puppeteer, as it may get removed.
-
-    heroku buildpacks:set heroku/nodejs
-
-Ensure heroku is running node in produciton mode:
-    heroku config:set NODE_ENV=production -a <<your app aname>>
-
-
-You will then need to install both of the following add-ons:
-
- - [mLab MongoDB](https://elements.heroku.com/addons/mongolab)
- - [Heroku Scheduler](https://elements.heroku.com/addons/scheduler)
+Grab a copy of the code and run it locally
 
 You'll want to create your own **.env** file with the MongoDB URI in it:
 
     MONGODB_URI=mongodb://<<username>>:<<password>>@<<your instance>>.mlab.com:<<port number>>/<<your instance>>
 
-Grab a copy of the code and run it locally
 
 
-Once you're set up and running it locally, push the code to heroku, test it out there.
+## Troubleshooting Helpful notes:
 
-You can schedule the list to auto update by adding the following to your scheduled task:
-
-    node scheduled-refresh.js
-
-Dyno Size: `FREE`  
-Frequency: `Daily`  
-Next Due: `00`
-
-## Other notes:
-
-Sometimes the local heroku development enviornment would die in the bakground, [this stackoverflow tip](https://stackoverflow.com/questions/33048784/heroku-open-puma-port-5000-already-in-use-rails) was helpful:
-
-
-Lists all processes on port 5000:
-
-    lsof -i :5000 
-
-Find the PID and then kill the process with this command:
-
-    sudo kill -9 <<pid>>
-
-Troubleshooting:
-
-View error logs:
+To view error logs:
 
     heroku logs --tail -a <<appname>>
 
-## Contributing:
+To kill the local development environment:
 
-`Pull Requests are Welcome!`
+    Sometimes the local heroku development enviornment would die in the bakground, [this stackoverflow tip](https://stackoverflow.com/questions/33048784/heroku-open-puma-port-5000-already-in-use-rails) was helpful:
+
+
+    Lists all processes on port 5000:
+
+        lsof -i :5000 
+
+    Find the PID and then kill the process with this command:
+
+        sudo kill -9 <<pid>>
+
+For best performance, ensure that the app is running in production mode (it should be already by default):
+
+    heroku config:set NODE_ENV=production -a <<your app aname>>
+
+## Special thankt to the following tools and utilities:
+
+The puppeteer buildpack which is used scrape the user's trailhead profile
+
+    heroku buildpacks:set jontewks/puppeteer
+
+Node JS
+
+    heroku buildpacks:set heroku/nodejs
+
+Additional Addons:
+
+ - [mLab MongoDB](https://elements.heroku.com/addons/mongolab)
+ - [Heroku Scheduler](https://elements.heroku.com/addons/scheduler)
