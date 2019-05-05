@@ -49,11 +49,13 @@ There is a `launch.json` file part of the project to make it easy to debug with 
 ## Troubleshooting Helpful notes:
 
 **Error Logs**
+
 To view error logs:
 
     heroku logs --tail -a <<appname>>
 
 **Kill Local Instance**
+
 To kill the local development environment:
 
 Sometimes the local heroku development enviornment may die in the background, [this stackoverflow tip](https://stackoverflow.com/questions/33048784/heroku-open-puma-port-5000-already-in-use-rails) was helpful:
@@ -67,6 +69,7 @@ Find the PID and then kill the process with this command:
     sudo kill -9 <<pid>>
 
 **Best Performance**
+
 For best performance, ensure that the app is running in production mode (it should be already by default):
 
     heroku config:set NODE_ENV=production -a <<your app aname>>
