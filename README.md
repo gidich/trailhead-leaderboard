@@ -12,15 +12,16 @@ https://trailhead-leaderboard.herokuapp.com/
 This entire application can run **for free** on Heroku.
 
 
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
 
 ## Quickstart:
 
 1. Click the **Deploy to Heroku** button
+    [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+    
     - For **App Name**, specify a name for your application. For example, if you specify trailhead-leaderboard, your application will be available at http://trailhead-leaderboard.herokuapp.com. Your app name has to be unique on the herokuapp.com domain.
-    - Click the **Deploy For Free** button
-    - This will get you up and running and you can get your team listed, but you'll want to keep their scores up to ate.
+    - Click the **Deploy App** button
+    
 2. Configure the schedule: (this keeps the leaderboard up to date daily)
     - Navigate to the heroku dashboard https://dashboard.heroku.com/apps and select your app.
     - Choose **Resources** > **Heroku Scheduler** (a new browser tab will appear)
