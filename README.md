@@ -12,13 +12,11 @@ https://trailhead-leaderboard.herokuapp.com/
 This entire application can run **for free** on Heroku.
 
 
-
-
 ## Quickstart:
 
 1. Click the **Deploy to Heroku** button
     [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
-    
+
     - For **App Name**, specify a name for your application. For example, if you specify trailhead-leaderboard, your application will be available at http://trailhead-leaderboard.herokuapp.com. Your app name has to be unique on the herokuapp.com domain.
     - Click the **Deploy App** button
     
