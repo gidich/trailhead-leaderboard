@@ -1,5 +1,7 @@
 const express = require('express')
 var bodyParser = require('body-parser')
+const { check } = require('express-validator/check');
+var validator = require('validator');
 
 const path = require('path')
 const PORT = process.env.PORT || 5000
@@ -40,5 +42,10 @@ express()
     .get('/trailblazers', trailblazer_controller.trailblazer_list)
     .get('/trailblazer/create', trailblazer_controller.trailblazer_create_get)
     .get('/trailblazer/details/:trailblazerId', trailblazer_controller.trailblazer_get)
-    .post('/trailblazer/create', trailblazer_controller.trailblazer_create_post)
+    .post(
+        '/trailblazer/create',
+        [
+            check('trailblazer_url').isURL()
+        ], 
+        trailblazer_controller.trailblazer_create_post)
     .listen(PORT, () => console.log(`Listening on ${PORT}`))

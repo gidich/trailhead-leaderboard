@@ -1,11 +1,15 @@
 var TrailblazerFactory = require('../factories/trailblazerModelFactory');
-const { body,validationResult } = require('express-validator/check');
+var TrailblazerRequestFactory = require('../factories/trailblazerRequestModelFactory');
+
+const { check,validationResult } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
 
 var TrailheadAdapter = require('../trailheadAdapter');
 
 var trailheadAdapter = new TrailheadAdapter();
 var trailblazerFactory = new TrailblazerFactory();
+var trailblazerRequestFactory = new TrailblazerRequestFactory();
+
 var moment = require('moment');
 
 exports.trailblazer_list = async function(req,res){
@@ -612,17 +616,34 @@ exports.trailblazer_list = async function(req,res){
     console.log(results);
     res.render('pages/index',results);
 }
-
 exports.trailblazer_create_get = function(req, res) {
     res.render('pages/trailblazerCreate');
-};
+}
 exports.trailblazer_get = async function(req,res){
     var result = await trailblazerFactory.getById(req.params.trailblazerId);
     res.render('pages/trailblazerDetails',result);
 }
 exports.trailblazer_create_post = async function(req, res) {
     const errors = validationResult(req);
-    var results = await trailheadAdapter.getProfileInfo(req.body.trailblazer_url);
-    await trailblazerFactory.set(results);
-    res.render('pages/trailblazerConfirm',results);
+    if(errors.isEmpty()){
+        var trailblazerRequest = trailblazerRequestFactory.getNew();
+        trailblazerRequest.profileUrl = req.body.trailblazer_url;
+        trailblazerRequest.successfullyParsed = false;
+        await trailblazerRequestFactory.set(trailblazerRequest);
+    
+        try {
+            var results = await trailheadAdapter.getProfileInfo(req.body.trailblazer_url);
+            await trailblazerFactory.set(results);
+            trailblazerRequest.successfullyParsed = true;
+            await trailblazerRequestFactory.set(trailblazerRequest);
+            res.render('pages/trailblazerConfirm',results);
+            
+        } catch (error) {
+            res.render('pages/trailblazerErrorNoted');
+        }
+        
+    }else{
+        console.log(errors.array());
+        res.render('pages/trailblazerAddErrors',{errors:errors.array()});
+    }
 };

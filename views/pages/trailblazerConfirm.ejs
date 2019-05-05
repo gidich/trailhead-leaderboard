@@ -7,12 +7,6 @@
         <div class="container">
             <% include ../partials/navbar.ejs %>
             <% include ../partials/trailblazerDetail.ejs %>
-
-            <form action="/trailblazer/create/" method="post">
-                <label for="trailblazer_url">Enter name: </label>
-                <input id="trailblazer_url" type="text" name="trailblazer_url" value="<%= profileUrl %>">
-                <input type="submit" value="OK">
-            </form>
         </div>
     </body>
 </html>

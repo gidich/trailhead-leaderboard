@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <% include ../partials/header.ejs %>
+    </head>
+    <body>
+        <div class="container">
+            <% include ../partials/navbar.ejs %>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <h3>The following erorrs were encounted with the URL you submitted:</h3>
+                    <div class="card-columns">
+                    <% errors.forEach(function(error){ %>
+                        <div class="card" >
+                        
+                            <div class="card-body">
+                                <h6 class="card-title"><%= error.location %></h6>
+                                <div class="card-text">
+                                    <div class="row" style="font-size:10px;">
+                                        <div class="col-sm-6">Message:</div>
+                                        <div class="col-sm-6"><%= error.msg %></div>
+                                    </div>
+                                    <div class="row" style="font-size:10px;">
+                                        <div class="col-sm-6">Param:</div>
+                                        <div class="col-sm-6"><%= error.param %></div>
+                                    </div>                                  
+                                </div>
+                            </div>
+                        </div>
+                    <% }); %>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </body>
+</html>

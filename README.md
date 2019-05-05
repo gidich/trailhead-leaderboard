@@ -24,6 +24,9 @@ Be sure to re-add the node jetpack after adding puppeteer, as it may get removed
 
     heroku buildpacks:set heroku/nodejs
 
+Ensure heroku is running node in produciton mode:
+    heroku config:set NODE_ENV=production -a <<your app aname>>
+
 
 You will then need to install both of the following add-ons:
 
@@ -59,6 +62,12 @@ Lists all processes on port 5000:
 Find the PID and then kill the process with this command:
 
     sudo kill -9 <<pid>>
+
+Troubleshooting:
+
+View error logs:
+
+    heroku logs --tail -a <<appname>>
 
 ## Contributing:
 

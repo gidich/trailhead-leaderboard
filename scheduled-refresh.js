@@ -25,7 +25,6 @@ mongoose.connect(process.env.MONGODB_URI, {
     useCreateIndex: true,
 });
 
-
 function delay(){
     return new Promise(resolve => setTimeout(resolve,3000))
 }
@@ -50,10 +49,9 @@ async function main() {
                     await delay();
                     console.log(`successfully updated profile information for :${trailblazer.full_name} at url:${trailblazer.profileUrl}`  );
                 } catch (error) {
-                    console.log(`encountered error while updating profile information for :${trailblazer.full_name} at url:${trailblazer.profileUrl} error: ${error}`  );
+                    console.error(new Error(`encountered error while updating profile information for :${trailblazer.full_name} at url:${trailblazer.profileUrl} error: ${error}`)  );
                 }
             }
-        
         }
         await processTrailblazers(trailblazers);
         return;
@@ -72,5 +70,3 @@ main()
         console.log(error);
         process.exit(1);
     });
-
-

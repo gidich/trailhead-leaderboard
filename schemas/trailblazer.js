@@ -2,6 +2,26 @@ var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 
+var trailblazerRequestSchema = new Schema(
+    {
+        schemaVersion: String,
+        trailblazerRequestId: {
+            type: String,
+            required: true,
+            index: true,
+            unique: true
+        },
+        profileUrl: String,
+        successfullyParsed: Boolean,
+    },
+    {
+        timestamps: {
+            createdAt: 'dateCreated',
+            updatedAt: 'dateUpdated'
+        }
+    }
+);
+
 var trailblazerSchema = new Schema(
     {
         schemaVersion: String,
@@ -103,5 +123,6 @@ var trailblazerSchema = new Schema(
 )
 
 module.exports = {
-    TrailblazerSchema : trailblazerSchema
+    TrailblazerSchema : trailblazerSchema,
+    TrailblazerRequestSchema : trailblazerRequestSchema
 }

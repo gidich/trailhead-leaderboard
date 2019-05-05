@@ -99,20 +99,23 @@ module.exports = class TrailheadAdapter {
     getProfileInfo(url){
         var self = this;
         return new Promise(function(resolve,reject){
-            puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] }).then(async browser => {
-                try{
-                    console.log(`starting browser and visiting:${url}`);
-                    let page = await browser.newPage();
-                    await page.setViewport({width:1920, height:1080});
-                    await page.goto(url, {waitUntil: 'networkidle0'});
-                    await page.waitFor(".user-profile").then(() => console.log('found user profile'));
-                    let results = await self.extractProfileDetails(page);
-                    await browser.close();
-                    resolve(results);  
-                }catch(err){
-                    console.log(err);
-                    reject(err);
-                }
+            puppeteer
+                .launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] })
+                .then(async browser => {
+                    try{
+                        console.log(`starting browser and visiting:${url}`);
+                        let page = await browser.newPage();
+                        await page.setViewport({width:1920, height:1080});
+                        await page.goto(url, {waitUntil: 'networkidle0'});
+                        await page.waitFor(".user-profile",{timeout:500}).then(() => console.log('found user profile'));
+                        let results = await self.extractProfileDetails(page);
+                        await browser.close();
+                        resolve(results);  
+                    }catch(err){
+                        console.log(err);
+                        await browser.close();
+                        reject(err);
+                    }
             })
         })
     }
