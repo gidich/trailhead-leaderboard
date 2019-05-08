@@ -91,4 +91,4 @@ Additional Addons:
  
  
  
- [![](https://codescene.io/projects/4815/status.svg) Get more details at **codescene.io**.](https://codescene.io/projects/4815/jobs/latest-successful/results)
+[![DeepScan grade](https://deepscan.io/api/teams/3663/projects/5396/branches/41392/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=3663&pid=5396&bid=41392)
