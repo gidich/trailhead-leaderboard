@@ -88,3 +88,7 @@ Additional Addons:
 
  - [mLab MongoDB](https://elements.heroku.com/addons/mongolab)
  - [Heroku Scheduler](https://elements.heroku.com/addons/scheduler)
+ 
+ 
+ 
+ [![](https://codescene.io/projects/4815/status.svg) Get more details at **codescene.io**.](https://codescene.io/projects/4815/jobs/latest-successful/results)
