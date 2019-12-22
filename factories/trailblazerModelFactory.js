@@ -122,12 +122,43 @@ module.exports = class TrailblazerModelFactory{
     set(model){
         var self = this;
         return new Promise(function(resolve,reject){
-            self.getBySlug(model.slug).then(function(results){
-                if(model.trailblazerId !== results.trailblazerId){
-                    results.trailblazerId = model.trailblazerId;
-                    results.save().then(
-                        resolve(self.set2(model))
-                    );
+            self.getBySlug(model.slug).then(function(original){
+                if(model.trailblazerId !== original.trailblazerId){
+
+                    try{
+                        var newHistory = {
+                            badgeCount: model.badgeCount,
+                            points: model.points,
+                            trails: model.trails,
+                            rankImage: model.rankImage,
+                            rank:model.rank
+                        };
+                        self.TrablazerModel.findOneAndUpdate(
+                            {
+                                'trailblazerId':original.trailblazerId
+                            },
+                            {
+                                $set: model,
+                                $push: {statsHistory:[newHistory]}
+                            },
+                            {
+                                upsert:true,
+                                new:true,
+                                runValidators:true,
+                                setDefaultsOnInsert:true
+                            },
+                            function(err,results){
+                                if(err) {
+                                    console.log('error')
+                                    console.log(err)
+                                    reject(err);
+                                }
+                            console.log("saved!")
+                            resolve(results);
+                        });
+                    }catch(err){
+                        reject(err);
+                    }
                 }else{
                     resolve(self.set2(model));
                 }
@@ -147,7 +178,7 @@ module.exports = class TrailblazerModelFactory{
                             console.log(err)
                             reject(err);
                         }
-                        
+                        results.bad
                         resolve(results !== null ? results : self.getNew());
                     }
                );
