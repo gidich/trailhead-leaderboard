@@ -125,9 +125,13 @@ module.exports = class TrailblazerModelFactory{
             self.getBySlug(model.slug).then(function(results){
                 if(model.trailblazerId !== results.trailblazerId){
                     results.trailblazerId = model.trailblazerId;
-                    results.save();
+                    results.save().then(
+                        resolve(self.set2(model))
+                    );
+                }else{
+                    resolve(self.set2(model));
                 }
-                resolve(self.set2(model));
+                
             });
         })
     }
