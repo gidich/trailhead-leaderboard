@@ -78,7 +78,7 @@ var trailblazerSchema = new Schema(
         }],
 
         badges: [{
-            id: Number,
+            id: String,
             api_name: String,
             badge_type: String,
             completed_at: Date,

@@ -79,7 +79,7 @@ module.exports = class TrailblazerModelFactory{
             }
         })
     }
-    set(model){
+    set2(model){
         var self = this;
         return new Promise(function(resolve,reject){
             try{
@@ -118,6 +118,40 @@ module.exports = class TrailblazerModelFactory{
             }
             
         });
+    }
+    set(model){
+        var self = this;
+        return new Promise(function(resolve,reject){
+            self.getBySlug(model.slug).then(function(results){
+                if(model.trailblazerId !== results.trailblazerId){
+                    results.trailblazerId = model.trailblazerId;
+                    results.save();
+                }
+                resolve(self.set2(model));
+            });
+        })
+    }
+    getBySlug(slug){
+        var self = this;
+        return new Promise(function(resolve,reject){
+            try {
+               var q = self.TrablazerModel.findOne({slug:String(slug)});
+               q.exec(
+                    function(err,results){
+                        if(err) {
+                            console.log('error')
+                            console.log(err)
+                            reject(err);
+                        }
+                        
+                        resolve(results !== null ? results : self.getNew());
+                    }
+               );
+            } catch (err) {
+                console.log('error');
+                reject(err);
+            }
+        })
     }
     getById(trailblazerId){
         var self = this;
