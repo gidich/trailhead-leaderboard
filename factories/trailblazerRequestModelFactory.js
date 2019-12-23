@@ -139,6 +139,7 @@ module.exports = class TrailblazerModelFactory{
         try{
             return this.Model.find({})
         } catch(err){
+            console.error(err);
             throw err;
         }
     }

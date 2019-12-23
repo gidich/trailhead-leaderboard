@@ -178,7 +178,6 @@ module.exports = class TrailblazerModelFactory{
                             console.log(err)
                             reject(err);
                         }
-                        results.bad
                         resolve(results !== null ? results : self.getNew());
                     }
                );
@@ -214,6 +213,7 @@ module.exports = class TrailblazerModelFactory{
         try{
             return this.TrablazerModel.find({})
         } catch(err){
+            console.error(err);
             throw err;
         }
     }
