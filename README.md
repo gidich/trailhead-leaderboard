@@ -38,13 +38,16 @@ This entire application can run **for free** on Heroku.
 
 It is good to follow Heroku's [node.js tutorial](https://devcenter.heroku.com/articles/getting-started-with-nodejs) to get an understanding of how node.js works on Heroku and to configure your local environment.
 
-Grab a copy of the code and run it locally
+Grab a copy of the code 
+
 
 You'll want to create your own **.env** file with the MongoDB URI in it:
 
     MONGODB_URI=mongodb://<<username>>:<<password>>@<<your instance>>.mlab.com:<<port number>>/<<your instance>>
 
-There is a `launch.json` file part of the project to make it easy to debug with VSCode.
+Run `npm install` in the directory you've downloaded
+
+There is a `launch.json` file part of the project to make it easy to debug with VSCode, run in VS code and look at the Debug Console to see what port it is running at (typically 5000) open your web browser to http://localhost:5000 and view it locally.
 
 ## Troubleshooting Helpful notes:
 
