@@ -16,10 +16,10 @@
         "express": "^4.16.4",
         "express-validator": "^5.3.1",
         "moment": "^2.24.0",
-        "mongoose": "^5.4.16",
+        "mongoose": "^5.9.6",
         "node-horseman": "^3.3.0",
         "pg": "^7.8.1",
-        "puppeteer": "^2.0.0",
+        "puppeteer": "^2.1.1",
         "validator": "^10.11.0"
     }
 }
