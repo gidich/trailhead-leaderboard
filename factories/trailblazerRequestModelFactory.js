@@ -106,7 +106,7 @@ module.exports = class TrailblazerModelFactory{
                             console.log(err)
                             reject(err);
                         }
-                    console.log("saved!")
+                    console.log("Successfully Saved Profile")
                     resolve(results);
                 });
             }catch(err){
