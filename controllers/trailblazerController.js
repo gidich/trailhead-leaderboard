@@ -585,6 +585,7 @@ exports.trailblazer_list = async function(req,res){
                             input: "$trailblazers",
                             as: "t",
                             in: {
+                                trailblazerId:"$$t.trailblazerId",
                                 full_name: "$$t.full_name",
                                 avatarImage: "$$t.avatarImage"
                             }
